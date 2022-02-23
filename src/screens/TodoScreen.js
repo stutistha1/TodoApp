@@ -11,10 +11,7 @@ import {
 } from 'react-native';
 import {Task} from '../components';
 
-const TodoScreen = ({navigation, route}) => {
-  const {params} = route;
-
-  console.log(params);
+const TodoScreen = () => {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
 
@@ -107,18 +104,18 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: '#C0C0C0',
     borderWidth: 5,
-    width: 250,
+    width: 320,
     fontSize: 20,
   },
   addWrapper: {
     width: 60,
     height: 60,
     backgroundColor: '#FFF',
-    borderRadius: 60,
+    borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: '#C0C0C0',
-    borderWidth: 1,
+    borderWidth: 5,
   },
   addText: {
     color: 'black',

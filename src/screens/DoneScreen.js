@@ -11,10 +11,7 @@ import {
 } from 'react-native';
 import {Task} from '../components';
 
-const DoneScreen = ({navigation, route}) => {
-  const {params} = route;
-
-  console.log(params);
+const DoneScreen = () => {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
 

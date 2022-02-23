@@ -11,7 +11,7 @@ const BottomTabNav = () => {
     <Navigator
       screenOptions={{
         tabBarStyle: {paddingVertical: 5},
-        tabBarLabelStyle: {fontSize: 14},
+        tabBarLabelStyle: {fontSize: 15},
       }}>
       <Screen
         name="To Do"
