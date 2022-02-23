@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {CheckBox, Icon} from 'react-native-elements';
 
 const Task = props => {
+  const [check1, setCheck1] = useState(false);
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
         <View style={styles.square} />
         <Text style={styles.itemText}>{props.text}</Text>
       </View>
-      <View style={styles.circular} />
+      <CheckBox
+        center
+        checked={check1}
+        onPress={() => setCheck1(!check1)}
+        checkedColor="black"
+      />
     </View>
   );
 };
