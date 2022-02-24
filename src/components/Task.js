@@ -1,60 +1,101 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {CheckBox, Icon} from 'react-native-elements';
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  Keyboard,
+} from 'react-native';
 
-const Task = props => {
-  const [check1, setCheck1] = useState(false);
+import {useActionProvider} from '../Provider';
+
+export default function AddTask() {
+  const actions = useActionProvider();
+
+  const [task, setTask] = useState({});
+  const [usedChar, setUsed] = useState(0);
+
+  const addAtask = () => {
+    Keyboard.dismiss();
+
+    setUsed(0);
+    setTask({});
+
+    if (task !== {} && task.text && task.text !== '') {
+      actions.addTask(task);
+    }
+  };
+
+  const updateNewTask = text => {
+    setUsed(text.length);
+
+    setTask({
+      text: text,
+    });
+  };
   return (
-    <View style={styles.item}>
-      <View style={styles.itemLeft}>
-        <View style={styles.square} />
-        <Text style={styles.itemText}>{props.text}</Text>
+    <>
+      <View style={styles.main.container}>
+        <View style={styles.darkT.addTask}>
+          <TextInput
+            style={styles.darkT.input}
+            value={task.text}
+            placeholderTextColor={'white'}
+            onChangeText={updateNewTask}
+            placeholder="Add a Task..."
+            maxLength={50}
+          />
+
+          <Text
+            style={{
+              fontSize: 14,
+              marginTop: 5,
+              color: 'white',
+            }}>{`${usedChar}/50`}</Text>
+
+          <TouchableOpacity style={styles.main.plus} onPress={addAtask}>
+            <Text style={{color: 'gray', fontSize: 30}}>+</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <CheckBox
-        center
-        checked={check1}
-        onPress={() => setCheck1(!check1)}
-        checkedColor="black"
-      />
-    </View>
+    </>
   );
+}
+
+const styles = {
+  main: StyleSheet.create({
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 45,
+    },
+    plus: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'lightgray',
+      height: 40,
+      width: 40,
+      borderRadius: 100,
+      margin: 7,
+    },
+  }),
+  darkT: StyleSheet.create({
+    addTask: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      position: 'absolute',
+      elevation: 3,
+      width: '90%',
+      padding: 3,
+      backgroundColor: 'black',
+      borderRadius: 40,
+    },
+    input: {
+      width: '65%',
+      paddingLeft: 20,
+      color: 'white',
+      fontSize: 20,
+    },
+  }),
 };
-
-const styles = StyleSheet.create({
-  item: {
-    backgroundColor: '#FFF',
-    padding: 15,
-    borderRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  itemLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-  },
-  square: {
-    width: 20,
-    height: 20,
-    backgroundColor: 'blue',
-    opacity: 0.4,
-    borderRadius: 5,
-    marginRight: 15,
-  },
-  itemText: {
-    maxWidth: '80%',
-    color: 'black',
-    fontSize: 20,
-  },
-  circular: {
-    width: 15,
-    height: 15,
-    borderColor: 'blue',
-    borderWidth: 3,
-    borderRadius: 4,
-  },
-});
-
-export default Task;

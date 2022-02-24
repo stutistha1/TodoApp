@@ -1,14 +1,17 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 
-import {BottomTabNav} from './routes';
+import Provider from './Provider';
+import BottomTabNav from './routes/BottomTabNav';
 
-const SampleApp = () => {
+export default function SampleApp() {
   return (
-    <NavigationContainer>
-      <BottomTabNav />
-    </NavigationContainer>
+    <>
+      <Provider>
+        <NavigationContainer>
+          <BottomTabNav />
+        </NavigationContainer>
+      </Provider>
+    </>
   );
-};
-
-export default SampleApp;
+}
