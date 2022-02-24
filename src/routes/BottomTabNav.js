@@ -31,7 +31,7 @@ export default function BottomTabNav() {
               />
             ),
             tabBarBadge: tasks.todo.length,
-            tabBarBadgeStyle: {color: 'black', backgroundColor: 'gray'},
+            tabBarBadgeStyle: {color: 'white', backgroundColor: 'gray'},
           }}
         />
 
@@ -47,7 +47,7 @@ export default function BottomTabNav() {
               />
             ),
             tabBarBadge: tasks.done.length,
-            tabBarBadgeStyle: {color: 'black', backgroundColor: 'gray'},
+            tabBarBadgeStyle: {color: 'white', backgroundColor: 'gray'},
           }}
         />
       </Navigator>
