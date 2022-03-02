@@ -1,21 +1,24 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
+let width = Dimensions.get('window').width;
+
 const TodoStyles = {
   main: {
     alignItems: 'center',
   },
   mainInput: {
-    borderWidth: 4,
+    borderWidth: 1,
     height: 55,
-    padding: 20,
+    width: width * 0.9,
+    padding: 10,
     margin: 10,
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: 9,
   },
   todoList: {
     borderWidth: 1,
     borderRadius: 10,
-
+    width: width * 0.8,
     height: 40,
   },
   todoView: {
