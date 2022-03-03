@@ -20,6 +20,7 @@ const TodoStyles = {
     borderRadius: 10,
     width: width * 0.8,
     height: 40,
+    padding: 10,
   },
   todoView: {
     flex: 1,
