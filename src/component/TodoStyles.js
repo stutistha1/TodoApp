@@ -19,7 +19,7 @@ const TodoStyles = {
     borderWidth: 1,
     borderRadius: 10,
     width: width * 0.8,
-    height: 40,
+    height: 45,
     padding: 10,
   },
   todoView: {
@@ -29,10 +29,10 @@ const TodoStyles = {
     padding: 5,
   },
   removeTodo: {
-    backgroundColor: 'cyan',
-    borderRadius: 4,
+    backgroundColor: 'black',
+    borderRadius: 10,
     alignItems: 'center',
-    margin: 4,
+    margin: 10,
   },
 };
 

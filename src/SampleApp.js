@@ -1,13 +1,16 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import Todo from './component/Todo';
 import store, {persistor} from './store';
 import {PersistGate} from 'redux-persist/integration/react';
+import {NavigationContainer} from '@react-navigation/native';
+import BottomTabNav from './routes/BottomTabNav';
 
 const SampleApp = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <Todo />
+      <NavigationContainer>
+        <BottomTabNav />
+      </NavigationContainer>
     </PersistGate>
   </Provider>
 );

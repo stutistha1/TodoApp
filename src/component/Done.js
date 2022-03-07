@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const Todo = () => {
+const Done = () => {
   const [todoValue, setTodoValue] = useState('');
 
   const dispatch = useDispatch();
@@ -74,33 +74,20 @@ const Todo = () => {
 
   return (
     <View style={styles.main}>
-      <TextInput
-        style={styles.mainInput}
-        onChangeText={setTodoValue}
-        placeholder={'Add your todo here'}
-        value={todoValue}
-        fontSize={20}
-      />
-      <Button
-        name="increase"
-        title="Add Todo"
-        onPress={addTodo}
-        color="black"
-      />
       <Text
         style={{
           alignSelf: 'stretch',
-          paddingLeft: 40,
-          fontSize: 18,
+          paddingLeft: 20,
+          fontSize: 19,
           color: 'black',
           fontWeight: 'bold',
           padding: 20,
         }}>
-        List of Todos :
+        Completed Todos :
       </Text>
       {renderTodoList()}
     </View>
   );
 };
 
-export default Todo;
+export default Done;
