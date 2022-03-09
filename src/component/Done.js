@@ -1,41 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {AddTodo, RemoveTodo} from '../actions/todoActions';
+import {RemoveDoneTodo} from '../actions/todoActions';
 import {styles} from './TodoStyles';
-import {
-  Text,
-  View,
-  TextInput,
-  Button,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, View, FlatList, TouchableOpacity} from 'react-native';
 
 const Done = () => {
-  const [todoValue, setTodoValue] = useState('');
-
   const dispatch = useDispatch();
 
   const data = useSelector(state => state);
 
-  const todos = data.todos.todos;
-
-  const addTodo = () => {
-    if (todos && !todos.includes(todoValue)) {
-      dispatch(AddTodo(todoValue));
-      setTodoValue('');
-    } else {
-      alert(`${todoValue} already added in Todo List`);
-    }
-  };
+  const todos = data.todos.doneTodos;
 
   const removeTodo = item => {
-    const todoIndex = todos.indexOf(item);
-    if (todoIndex > -1) {
-      dispatch(RemoveTodo(item));
-    } else {
-      alert(`${todoValue} is not in the Todo List`);
-    }
+    dispatch(RemoveDoneTodo(item));
   };
 
   const renderTodoList = () => {

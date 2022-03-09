@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {AddTodo, RemoveTodo} from '../actions/todoActions';
+import {AddTodo, DoneTodo, RemoveTodo} from '../actions/todoActions';
 import {styles} from './TodoStyles';
 import {
   Text,
@@ -10,6 +10,8 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
+import Done from './Done';
 
 const Todo = () => {
   const [todoValue, setTodoValue] = useState('');
@@ -19,6 +21,11 @@ const Todo = () => {
   const data = useSelector(state => state);
 
   const todos = data.todos.todos;
+
+  const doneTodo = item => {
+    dispatch(DoneTodo(item));
+    dispatch(RemoveTodo(item));
+  };
 
   const addTodo = () => {
     if (todos && !todos.includes(todoValue)) {
@@ -44,6 +51,15 @@ const Todo = () => {
         data={todos}
         renderItem={({item}) => (
           <View style={styles.todoView}>
+            <CheckBox
+              tintColors={{
+                false: 'black',
+                true: 'black',
+              }}
+              disabled={false}
+              value={false}
+              onValueChange={() => doneTodo(item)}
+            />
             <View style={styles.todoList}>
               <Text
                 style={{

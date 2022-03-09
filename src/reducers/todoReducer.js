@@ -1,13 +1,25 @@
-import {ADD_TODO, REMOVE_TODO} from '../actions/ActionTypes';
+import {
+  ADD_TODO,
+  DONE_TODO,
+  REMOVE_TODO,
+  REMOVE_DONE_TODO,
+} from '../actions/ActionTypes';
 
-const INITIAL_STATE = {todos: []};
+const INITIAL_STATE = {todos: [], doneTodos: []};
 
 const todoReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_TODO:
-      return {todos: [...state.todos, action.payload]};
+      return {...state, todos: [...state.todos, action.payload]}; //state maintain ...state
     case REMOVE_TODO:
-      return {todos: handleRemoveTodo(action.payload, state.todos)};
+      return {...state, todos: handleRemoveTodo(action.payload, state.todos)};
+    case DONE_TODO:
+      return {...state, doneTodos: [...state.doneTodos, action.payload]};
+    case REMOVE_DONE_TODO:
+      return {
+        ...state,
+        doneTodos: handleRemoveTodo(action.payload, state.doneTodos),
+      };
     default:
       return state;
   }
