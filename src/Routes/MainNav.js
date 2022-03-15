@@ -15,7 +15,7 @@ const MainNav = () => (
       }}>
       <Stack.Screen name="Github Search" component={GithubSearch} />
 
-      <Stack.Screen name="Github Repo" component={GithubRepo} />
+      <Stack.Screen name="Github Repositories" component={GithubRepo} />
     </Stack.Navigator>
   </NavigationContainer>
 );
