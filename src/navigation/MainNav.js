@@ -7,7 +7,7 @@ import GithubRepo from '../Github/GithubRepo';
 
 const Stack = createNativeStackNavigator();
 
-const MainNavigator = () => (
+const MainNav = () => (
   <NavigationContainer>
     <Stack.Navigator
       screenOptions={{
@@ -20,4 +20,4 @@ const MainNavigator = () => (
   </NavigationContainer>
 );
 
-export default MainNavigator;
+export default MainNav;

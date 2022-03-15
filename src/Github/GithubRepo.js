@@ -38,12 +38,12 @@ const GithubRepo = () => {
   };
 
   const renderItem = ({item}) => (
-    <View style={STYLES.container}>
-      <Text style={STYLES.header}>{item.name}</Text>
+    <View style={Styles.container}>
+      <Text style={Styles.header}>{item.name}</Text>
 
-      <Text style={STYLES.text}>Language used: {item.language || 'N/A'}</Text>
+      <Text style={Styles.text}>Language used: {item.language || 'N/A'}</Text>
 
-      <Text style={STYLES.text}>
+      <Text style={Styles.text}>
         Created at: {moment(item.created_at).format('MMM DD, YYYY')}
       </Text>
     </View>
@@ -72,7 +72,7 @@ const GithubRepo = () => {
 
 export default GithubRepo;
 
-const STYLES = StyleSheet.create({
+const Styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     backgroundColor: 'black',
@@ -82,11 +82,12 @@ const STYLES = StyleSheet.create({
     marginHorizontal: 8,
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     color: 'white',
+    fontWeight: '600',
   },
   header: {
-    fontSize: 25,
+    fontSize: 21,
     fontWeight: 'bold',
     color: 'white',
   },

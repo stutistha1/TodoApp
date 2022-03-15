@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
@@ -10,28 +12,23 @@ import {
   ActivityIndicator,
   Keyboard,
 } from 'react-native';
-import axios from 'axios';
 
 import {CardUser} from './CardUser';
 
 const GithubSearch = () => {
-  const [input, setInput] = useState('');
+  const [insert, setInsert] = useState('');
   const [users, setUsers] = useState({});
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
 
-  const onSearchPress = async () => {
+  const search = async () => {
     Keyboard.dismiss();
     setUsers({});
 
     try {
       setLoading(true);
-
-      // https://api.github.com/users/nepsians
-      // const repsonse = await fetch(`https://api.github.com/users/${input}`);
-
-      const {data} = await axios.get(`https://api.github.com/users/${input}`);
+      const {data} = await axios.get(`https://api.github.com/users/${insert}`);
 
       setUsers(data);
       setLoading(false);
@@ -47,29 +44,24 @@ const GithubSearch = () => {
     }
   };
 
-  const navToRepoScreen = () => {
+  const repoScreen = () => {
     navigation.navigate('Github Repo', {
       name: users.login || '',
     });
   };
 
-  const renderContent = () => {
-    if (users?.message === 'Not Found') {
+  const renderItem = () => {
+    if (users?.message === 'No user available') {
       return (
         <View>
-          <Text
-            style={{
-              textAlign: 'center',
-            }}>
-            {'User not found!!!\nPlease try again with another username.'}
-          </Text>
+          <Text>{'Invalid user!!!\nPlease insert correct username.'}</Text>
         </View>
       );
     }
 
     if (users?.name || users?.login) {
       return (
-        <TouchableOpacity activeOpacity={0.9} onPress={navToRepoScreen}>
+        <TouchableOpacity activeOpacity={0.9} onPress={repoScreen}>
           <CardUser item={users} />
         </TouchableOpacity>
       );
@@ -77,34 +69,35 @@ const GithubSearch = () => {
   };
 
   return (
-    <View style={styles.container} behavior="padding">
+    <View style={styles.container}>
       <View style={{alignItems: 'center'}}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Search</Text>
+        <View style={styles.title}>
+          <Text style={styles.titleStyle}>Search Github Users</Text>
         </View>
 
         <TextInput
-          onChangeText={setInput}
-          value={input}
-          placeholder="Search for a GitHub user"
-          underlineColorAndroid="gray"
+          onChangeText={setInsert}
+          value={insert}
+          placeholder="Enter username"
+          fontSize={20}
+          underlineColorAndroid="black"
           style={{width: '100%'}}
-          onSubmitEditing={onSearchPress}
+          onSubmitEditing={search}
         />
 
         <TouchableOpacity
-          activeOpacity={0.6}
-          onPress={onSearchPress}
-          style={styles.increaseBtnStyle}>
-          <Text style={styles.btnTxt}>Search</Text>
+          activeOpacity={0.7}
+          onPress={search}
+          style={styles.buttonStyle}>
+          <Text style={styles.buttonText}>Search</Text>
         </TouchableOpacity>
       </View>
 
-      <View style={{flex: 1, marginVertical: 18}}>
+      <View style={{flex: 1, marginVertical: 20}}>
         {loading ? (
           <ActivityIndicator size="large" color="#222" />
         ) : (
-          renderContent()
+          renderItem()
         )}
       </View>
     </View>
@@ -116,21 +109,24 @@ export default GithubSearch;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     padding: 20,
   },
-  titleContainer: {
-    flexDirection: 'row',
-  },
   title: {
+    flexDirection: 'row',
+    padding: 10,
+  },
+  titleStyle: {
     fontSize: 28,
+    color: 'black',
+    fontWeight: 'bold',
   },
   button: {
     marginTop: 10,
     paddingLeft: 20,
     paddingRight: 20,
   },
-  increaseBtnStyle: {
+  buttonStyle: {
     padding: 10,
     backgroundColor: '#222',
     borderRadius: 14,
@@ -138,5 +134,5 @@ const styles = StyleSheet.create({
     width: 122,
     alignItems: 'center',
   },
-  btnTxt: {fontSize: 18, color: 'white'},
+  buttonText: {fontSize: 18, color: 'white'},
 });
