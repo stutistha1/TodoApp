@@ -1,15 +1,6 @@
 import React from 'react';
-import {View} from 'react-native';
-import Title from './components/Title';
-import InputBox from './components/InputBox';
+import MainNavigator from './navigation/MainNavigator';
 
-const SampleApp = () => {
-  return (
-    <View>
-      <Title />
-      <InputBox />
-    </View>
-  );
-};
+const SampleApp = () => <MainNavigator />;
 
 export default SampleApp;
